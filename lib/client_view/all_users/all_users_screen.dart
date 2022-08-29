@@ -1,40 +1,26 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-
 import 'package:flutter/material.dart';
+import 'package:new_bodima_app/client_view/payment_screen.dart';
+import 'package:new_bodima_app/user_view/add_user/add_user_screen.dart';
 
-import '../user_view/payment_screen/payment_screen.dart';
-
-class PaymentScreen extends StatefulWidget {
-  final String userUid;
-  const PaymentScreen({
-    super.key,
-    required this.userUid,
-  });
+class AllUsersScreen extends StatefulWidget {
+  const AllUsersScreen({Key? key}) : super(key: key);
 
   @override
-  State<PaymentScreen> createState() => _PaymentScreenState();
+  State<AllUsersScreen> createState() => _AllUsersScreenState();
 }
 
-class _PaymentScreenState extends State<PaymentScreen> {
+class _AllUsersScreenState extends State<AllUsersScreen> {
   @override
   Widget build(BuildContext context) {
-    // ignore: non_constant_identifier_names
-    //double ScreenHeight = (MediaQuery.of(context).size.height);
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        leading: BackButton(
-          color: Colors.black,
-        ),
-      ),
-      body: StreamBuilder<List<PaymentData>>(
-        stream: readDashboardUser(widget.userUid),
+      body: StreamBuilder<List<UsersData>>(
+        stream: readDashboardUser(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            final allUsers = snapshot.data;
+            final allUsers = snapshot.data!;
             return ListView(
-              children: allUsers!.map(buildUser).toList(),
+              children: allUsers.map(buildUser).toList(),
             );
           } else {
             return const Center(
@@ -47,8 +33,13 @@ class _PaymentScreenState extends State<PaymentScreen> {
   }
 
   //......................Methods.........................................................
-  Widget buildUser(PaymentData user) => InkWell(
-        onTap: () {},
+  Widget buildUser(UsersData user) => InkWell(
+        onTap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+                builder: (context) => PaymentScreen(userUid: user.id)),
+          );
+        },
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Container(
@@ -74,14 +65,14 @@ class _PaymentScreenState extends State<PaymentScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        user.id,
+                        user.name,
                         style: const TextStyle(
                             color: Colors.black,
                             fontSize: 20,
                             fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        user.paymentStatus,
+                        user.phoneNumber1,
                         style: const TextStyle(
                             color: Colors.black54, fontSize: 13),
                       ),
@@ -90,17 +81,21 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: const Color.fromARGB(
-                          255, 203, 252, 214), // background
-                      onPrimary:
-                          const Color.fromARGB(255, 15, 156, 50), // foreground
+                  child: Container(
+                    height: 50,
+                    width: 50,
+                    decoration: BoxDecoration(
+                      color: Colors.green,
+                      borderRadius: BorderRadius.circular(15),
                     ),
-                    onPressed: () {},
-                    child: const Text(
-                      'APPROVE',
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                    child: Center(
+                      child: Text(
+                        user.roomNumber,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 25,
+                        ),
+                      ),
                     ),
                   ),
                 )
@@ -110,16 +105,11 @@ class _PaymentScreenState extends State<PaymentScreen> {
         ),
       );
   //......................................................................................
-  Stream<List<PaymentData>> readDashboardUser(String userUniqId) =>
-      FirebaseFirestore.instance
-          .collection("PaymentData")
-          .doc(userUniqId)
-          .collection("Months")
-          .snapshots()
-          .map(
+  Stream<List<UsersData>> readDashboardUser() =>
+      FirebaseFirestore.instance.collection("UsersData").snapshots().map(
             (snapshot) => snapshot.docs
                 .map(
-                  (doc) => PaymentData.fromJson(
+                  (doc) => UsersData.fromJson(
                     doc.data(),
                   ),
                 )

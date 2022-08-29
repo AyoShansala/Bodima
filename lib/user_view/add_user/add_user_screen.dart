@@ -1,20 +1,33 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:new_bodima_app/user_view/user_profile/user_profile_screen.dart';
 
-import '../login_view/widgets/custom_button.dart';
-import '../login_view/widgets/custom_textfield.dart';
+import '../../login_view/widgets/custom_button.dart';
+import '../../login_view/widgets/custom_textfield.dart';
 
-class AddUserScreen extends StatelessWidget {
+class AddUserScreen extends StatefulWidget {
   AddUserScreen({Key? key}) : super(key: key);
+
+  @override
+  State<AddUserScreen> createState() => _AddUserScreenState();
+}
+
+class _AddUserScreenState extends State<AddUserScreen> {
   final TextEditingController _nameTxtController = TextEditingController();
+
   final TextEditingController _addressTxtController = TextEditingController();
+
   final TextEditingController _roomNumTxtController = TextEditingController();
+
   final TextEditingController _phoneNumTxtController = TextEditingController();
+
   final TextEditingController _secondPhoneNumTxtController =
       TextEditingController();
+
   final TextEditingController _idNumTxtController = TextEditingController();
+  late String? mtoken;
 
   @override
   Widget build(BuildContext context) {
@@ -88,6 +101,11 @@ class AddUserScreen extends StatelessWidget {
                     BordButton(
                         text: "Submit",
                         press: () async {
+                          FirebaseMessaging.instance.getToken().then((token) {
+                            setState(() {
+                              mtoken = token;
+                            });
+                          });
                           //add user data
                           final userTest = UsersData(
                             name: _nameTxtController.text,
@@ -96,6 +114,7 @@ class AddUserScreen extends StatelessWidget {
                             phoneNumber1: _phoneNumTxtController.text,
                             phoneNumber2: _secondPhoneNumTxtController.text,
                             idNumber: _idNumTxtController.text,
+                            pushIdToken: mtoken!,
                           );
                           createUser(userTest);
                           Navigator.of(context).push(
@@ -137,6 +156,7 @@ class UsersData {
   final String phoneNumber1;
   final String phoneNumber2;
   final String idNumber;
+  final String pushIdToken;
   UsersData({
     this.id = '',
     required this.name,
@@ -145,6 +165,7 @@ class UsersData {
     required this.phoneNumber1,
     required this.phoneNumber2,
     required this.idNumber,
+    required this.pushIdToken,
   });
 
   Map<String, dynamic> toJson() => {
@@ -155,6 +176,7 @@ class UsersData {
         'Phone_Number1': phoneNumber1,
         'Phone_Number2': phoneNumber2,
         'ID_Number': idNumber,
+        'Push_notifi_id': pushIdToken,
       };
 
   static UsersData fromJson(Map<String, dynamic> json) => UsersData(
@@ -165,5 +187,6 @@ class UsersData {
         phoneNumber1: json['Phone_Number1'].toString(),
         phoneNumber2: json['Phone_Nummber2'].toString(),
         idNumber: json['ID_Number'].toString(),
+        pushIdToken: json['Push_notifi_id'].toString(),
       );
 }

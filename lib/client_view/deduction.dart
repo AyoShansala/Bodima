@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'payment_tab.dart';
 
 class Deduction extends StatelessWidget {
   const Deduction({super.key});
@@ -26,26 +25,26 @@ class Deduction extends StatelessWidget {
                     minHeight: ScreenHeight,
                   ),
                   child: Column(
-                    children: [
-                      const SizedBox(
-                        height: 25,
+                      // children: [
+                      //   const SizedBox(
+                      //     height: 25,
+                      //   ),
+                      //   PaymentTab(
+                      //       data2: ' 10,000', onPressed: () {}, data1: 'January'),
+                      //   const SizedBox(
+                      //     height: 25,
+                      //   ),
+                      //   PaymentTab(
+                      //       data2: ' 10,000',
+                      //       onPressed: () {},
+                      //       data1: 'February'),
+                      //   const SizedBox(
+                      //     height: 25,
+                      //   ),
+                      //   PaymentTab(
+                      //       data2: ' 10,000', onPressed: () {}, data1: 'March'),
+                      // ],
                       ),
-                      PaymentTab(
-                          data2: ' 10,000', onPressed: () {}, data1: 'January'),
-                      const SizedBox(
-                        height: 25,
-                      ),
-                      PaymentTab(
-                          data2: ' 10,000',
-                          onPressed: () {},
-                          data1: 'February'),
-                      const SizedBox(
-                        height: 25,
-                      ),
-                      PaymentTab(
-                          data2: ' 10,000', onPressed: () {}, data1: 'March'),
-                    ],
-                  ),
                 ),
               );
             },

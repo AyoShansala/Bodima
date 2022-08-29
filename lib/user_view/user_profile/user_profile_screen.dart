@@ -123,6 +123,56 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                             SizedBox(
                               height: 25,
                             ),
+                            CustomCard(
+                              color1: Color.fromARGB(255, 203, 241, 252),
+                              color2: Color.fromARGB(255, 15, 116, 156),
+                              amount: 'LKR 10,000',
+                              month: 'August',
+                              status: 'PAY NOW',
+                            ),
+                            SizedBox(
+                              height: 25,
+                            ),
+                            CustomCard(
+                              color1: Color.fromARGB(255, 203, 241, 252),
+                              color2: Color.fromARGB(255, 15, 116, 156),
+                              amount: 'LKR 10,000',
+                              month: 'September',
+                              status: 'PAY NOW',
+                            ),
+                            SizedBox(
+                              height: 25,
+                            ),
+                            CustomCard(
+                              color1: Color.fromARGB(255, 203, 241, 252),
+                              color2: Color.fromARGB(255, 15, 116, 156),
+                              amount: 'LKR 10,000',
+                              month: 'Octomber',
+                              status: 'PAY NOW',
+                            ),
+                            SizedBox(
+                              height: 25,
+                            ),
+                            CustomCard(
+                              color1: Color.fromARGB(255, 203, 241, 252),
+                              color2: Color.fromARGB(255, 15, 116, 156),
+                              amount: 'LKR 10,000',
+                              month: 'November',
+                              status: 'PAY NOW',
+                            ),
+                            SizedBox(
+                              height: 25,
+                            ),
+                            CustomCard(
+                              color1: Color.fromARGB(255, 203, 241, 252),
+                              color2: Color.fromARGB(255, 15, 116, 156),
+                              amount: 'LKR 10,000',
+                              month: 'December',
+                              status: 'PAY NOW',
+                            ),
+                            SizedBox(
+                              height: 25,
+                            ),
                           ],
                         ),
                       ),

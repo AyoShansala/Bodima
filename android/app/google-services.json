@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1004785202421",
+    "project_id": "new-bodima",
+    "storage_bucket": "new-bodima.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1004785202421:android:f25e1a7c7e2a9adad681bc",
+        "android_client_info": {
+          "package_name": "com.example.new_bodima_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1004785202421-pubvev2p4oo1avi0isb838pa8fgh83nb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA7EuFGVVTpwHJU_3Aq3NYTWyRHgOliLqE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1004785202421-pubvev2p4oo1avi0isb838pa8fgh83nb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

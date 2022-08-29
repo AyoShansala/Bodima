@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:new_bodima_app/login_view/otp_screen.dart';
 import 'package:new_bodima_app/login_view/widgets/custom_textfield.dart';
 
 import 'widgets/custom_button.dart';
@@ -67,14 +68,13 @@ class HomeScreen extends StatelessWidget {
                               BordButton(
                                 text: "Get OTP",
                                 press: () {
-                                  //send phone number to otp screen
-                                  // Navigator.of(context).push(
-                                  //   MaterialPageRoute(
-                                  //     builder: (c) => OTPScreen(
-                                  //       phone: phoneNumberController.text,
-                                  //     ),
-                                  //   ),
-                                  // );
+                                  // send phone number to otp screen
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (c) => OTPScreen(
+                                          phone: phoneNumberController.text),
+                                    ),
+                                  );
                                 },
                               )
                             ],

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:new_bodima_app/client_view/all_users/all_users_screen.dart';
+import 'package:new_bodima_app/client_view/push_notification/all_users.dart';
+import 'package:new_bodima_app/client_view/widgets/custon_drawer.dart';
 
 import 'deduction.dart';
 import 'payment_screen.dart';
@@ -13,7 +16,7 @@ class CustomTabBarController extends StatelessWidget {
       child: SafeArea(
         child: Scaffold(
           backgroundColor: const Color.fromARGB(255, 241, 241, 241),
-          drawer: Drawer(),
+          drawer: ClientCustomDrawer(),
           appBar: AppBar(
             toolbarHeight: 65,
             backgroundColor: const Color.fromARGB(255, 3, 53, 4),
@@ -22,7 +25,7 @@ class CustomTabBarController extends StatelessWidget {
           bottomNavigationBar: menu(),
           body: TabBarView(
             children: [
-              PaymentScreen(),
+              AllUsersScreen(),
               Deduction(),
             ],
           ),

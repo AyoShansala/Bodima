@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:new_bodima_app/login_view/widgets/custom_button.dart';
 
+import '../user_view/add_user/add_user_screen.dart';
+
 class OTPScreen extends StatefulWidget {
   final String phone;
   OTPScreen({
@@ -32,11 +34,11 @@ class _OTPScreenState extends State<OTPScreen> {
         await FirebaseAuth.instance.signInWithCredential(credential).then(
           (value) {
             if (value.user != null) {
-              // Navigator.of(context).push(
-              //   MaterialPageRoute(
-              //     builder: (c) => AddUserScreen(),
-              //   ),
-              // );
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (c) => AddUserScreen(),
+                ),
+              );
             }
           },
         );
@@ -160,36 +162,36 @@ class _OTPScreenState extends State<OTPScreen> {
                                 text: "Verify OTP",
                                 press: () async {
                                   //Verifying enterd otp number
-                                  // try {
-                                  //   await FirebaseAuth.instance
-                                  //       .signInWithCredential(
-                                  //     PhoneAuthProvider.credential(
-                                  //       verificationId: verificationCode!,
-                                  //       smsCode: otpNumber,
-                                  //     ),
-                                  //   )
-                                  //       .then(
-                                  //     (value) {
-                                  //       if (value.user != null) {
-                                  //         Navigator.of(context).push(
-                                  //           MaterialPageRoute(
-                                  //             builder: (c) => AddUserScreen(),
-                                  //           ),
-                                  //         );
-                                  //       }
-                                  //     },
-                                  //   );
-                                  // } catch (e) {
-                                  //   FocusScope.of(context).unfocus();
-                                  //   ScaffoldMessenger.of(context).showSnackBar(
-                                  //     SnackBar(
-                                  //       content: Text("Invalid OTP"),
-                                  //       duration: Duration(
-                                  //         seconds: 3,
-                                  //       ),
-                                  //     ),
-                                  //   );
-                                  // }
+                                  try {
+                                    await FirebaseAuth.instance
+                                        .signInWithCredential(
+                                      PhoneAuthProvider.credential(
+                                        verificationId: verificationCode!,
+                                        smsCode: otpNumber,
+                                      ),
+                                    )
+                                        .then(
+                                      (value) {
+                                        if (value.user != null) {
+                                          Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                              builder: (c) => AddUserScreen(),
+                                            ),
+                                          );
+                                        }
+                                      },
+                                    );
+                                  } catch (e) {
+                                    FocusScope.of(context).unfocus();
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text("Invalid OTP"),
+                                        duration: Duration(
+                                          seconds: 3,
+                                        ),
+                                      ),
+                                    );
+                                  }
                                 },
                               )
                             ],
